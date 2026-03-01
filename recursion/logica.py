@@ -37,6 +37,15 @@ def riesgo_promedio(lista, acum=0, cant=0):
     
     return riesgo_promedio(lista[1:], acum + riesgo_actual, cant + 1)
 
+def secuencia_mas_larga(lista, l):
+    if len(lista) == 0:
+        return l 
+    
+    if len(lista[0].secuencia) > len(l.secuencia):
+        l = lista[0]
+
+    return secuencia_mas_larga(lista[1:])
+
 
 
 
