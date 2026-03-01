@@ -49,6 +49,24 @@ def secuencia_mas_larga(lista, l):
 
 
 
+def generar_subcadenas_de_secuencia(secuencia, corte, lista):
+    if corte > len(secuencia):
+        return lista 
+    fragmento = secuencia[0:corte]
+    l = lista + [fragmento]
+
+    return generar_subcadenas_de_secuencia(secuencia, corte + 1, lista)
+
+def obtener_todas_secuencias(secuencia, lista_final):
+    if len(secuencia) == 0:
+        return lista_final
+    caja_actualizada = generar_subcadenas_de_secuencia(secuencia, 1 , lista_final)
+
+    return obtener_todas_secuencias(secuencia[1:], caja_actualizada)
+
+
+
+
 
     
 
