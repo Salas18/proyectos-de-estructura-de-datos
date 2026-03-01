@@ -44,14 +44,13 @@ def secuencia_mas_larga(lista, l):
     if len(lista[0].secuencia) > len(l.secuencia):
         l = lista[0]
 
-    return secuencia_mas_larga(lista[1:])
+    return secuencia_mas_larga(lista[1:], l)
 
 
 
 
 
     
-
 
 
 
