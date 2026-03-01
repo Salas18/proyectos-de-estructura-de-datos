@@ -14,11 +14,36 @@ def registrar_secuencias(lista, nuevo_objeto):
 
         return primer_elemento + registrar_secuencias(resto_lista, nuevo_objeto)
 
-def contar_secuencias(patron, secuencia):
-     if len(secuencia) < len(patron):
-          return 0
-     
-     p = secuencia[0:len(p)]
+def contar_ocurrencias(patron, secuencia):
+    if len(secuencia) < len(patron):
+        return 0
+    
+    p = secuencia[0:len(patron)]
+    
+    if p == patron:
+        coincidencia = 1
+    else:
+        coincidencia = 0
+
+    return coincidencia + contar_ocurrencias(patron, secuencia[1:])
+
+def riesgo_promedio(lista, acum=0, cant=0):
+    if len(lista) == 0:
+        if cant == 0:
+            return 0
+        return acum / cant
+        
+    riesgo_actual = lista[0].nivel_riesgo
+    
+    return riesgo_promedio(lista[1:], acum + riesgo_actual, cant + 1)
+
+
+
+
+
+    
+
+
 
 
 
