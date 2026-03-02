@@ -91,9 +91,7 @@ def mutacion_genetica(secuencia):
     return letra_mutada + mutacion_genetica(secuencia[1:])
 
 
-# --- Pruebas súper simplificadas ---
 
-# Objeto básico para las funciones que piden una lista
 seq1 = SecuenciaADN(1, "Prueba", "AGTC", 20)
 lista_prueba = [seq1]
 
