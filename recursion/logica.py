@@ -5,6 +5,9 @@ class SecuenciaADN:
         self.secuencia: str = secuencia 
         self.nivel_riesgo: int = nivel_riesgo
 
+    def __repr__(self):
+        return f"({self.nombre_secuencia} - {self.secuencia})"
+
 def registrar_secuencias(lista, nuevo_objeto):
         if len(lista) == 0:
             return [nuevo_objeto]
@@ -46,16 +49,13 @@ def secuencia_mas_larga(lista, l):
 
     return secuencia_mas_larga(lista[1:], l)
 
-
-
-
 def generar_subcadenas_de_secuencia(secuencia, corte, lista):
     if corte > len(secuencia):
         return lista 
     fragmento = secuencia[0:corte]
     l = lista + [fragmento]
 
-    return generar_subcadenas_de_secuencia(secuencia, corte + 1, lista)
+    return generar_subcadenas_de_secuencia(secuencia, corte + 1, l)
 
 def obtener_todas_secuencias(secuencia, lista_final):
     if len(secuencia) == 0:
@@ -63,6 +63,50 @@ def obtener_todas_secuencias(secuencia, lista_final):
     caja_actualizada = generar_subcadenas_de_secuencia(secuencia, 1 , lista_final)
 
     return obtener_todas_secuencias(secuencia[1:], caja_actualizada)
+
+
+def contar_nucleotidos(ADN):
+    if len(ADN) == 0:
+        return 0
+    
+    cont = 0
+    if ADN[0] == "A":
+        cont = 1
+    elif ADN[0] == "T":
+        cont = -1 
+    
+    return cont + contar_nucleotidos(ADN[1:])
+
+def mutacion_genetica(secuencia):
+    if len(secuencia) == 0:
+        return ""
+    
+    letra_mutada = secuencia[0]
+
+    if letra_mutada == "A":
+        letra_mutada = "T"
+    elif letra_mutada == "T":
+        letra_mutada = "A"
+    
+    return letra_mutada + mutacion_genetica(secuencia[1:])
+
+
+# --- Pruebas súper simplificadas ---
+
+# Objeto básico para las funciones que piden una lista
+seq1 = SecuenciaADN(1, "Prueba", "AGTC", 20)
+lista_prueba = [seq1]
+
+print("1. Registrar:", registrar_secuencias(lista_prueba, seq1))
+print("2. Ocurrencias de 'AT':", contar_ocurrencias("AT", "ATGCATGCAT"))
+print("3. Riesgo promedio:", riesgo_promedio(lista_prueba))
+print("4. Secuencia más larga:", secuencia_mas_larga(lista_prueba, seq1).secuencia)
+print("5. Subcadenas de 'ATC':", obtener_todas_secuencias("ATC", []))
+print("6. ¿Más A que T en 'AGTTGCAT'?:", contar_nucleotidos("AGTTGCAT") > 0)
+print("7. Mutar 'AGTC':", mutacion_genetica("AGTC"))
+
+
+
 
 
 
