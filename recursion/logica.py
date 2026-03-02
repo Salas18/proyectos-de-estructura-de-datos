@@ -99,8 +99,8 @@ print("1. Registrar:", registrar_secuencias(lista_prueba, seq1))
 print("2. Ocurrencias de 'AT':", contar_ocurrencias("AT", "ATGCATGCAT"))
 print("3. Riesgo promedio:", riesgo_promedio(lista_prueba))
 print("4. Secuencia más larga:", secuencia_mas_larga(lista_prueba, seq1).secuencia)
-print("5. Subcadenas de 'ATC':", obtener_todas_secuencias("ATC", []))
-print("6. ¿Más A que T en 'AGTTGCAT'?:", contar_nucleotidos("AGTTGCAT") > 0)
+print("5. Subcadenas de 'ATC':", obtener_todas_secuencias("ABC", []))
+print("6. ¿Más A que T en 'AGTTGCAT'?:", contar_nucleotidos("AGTTGCAT")> 0)
 print("7. Mutar 'AGTC':", mutacion_genetica("AGTC"))
 
 
