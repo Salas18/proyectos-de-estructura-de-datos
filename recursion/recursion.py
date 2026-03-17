@@ -1,7 +1,7 @@
 def registrar_secuencias(lista, nueva_secuencia):
     if len(lista) == 0:
         return [nueva_secuencia]
-    
+
     primer_elemento = [lista[0]]
     resto_lista = lista[1:]
 
@@ -37,7 +37,6 @@ def secuencia_mas_larga(lista, l):
     if len(lista) == 0:
         return l 
     
-
     paciente_actual = lista[0]
     texto_paciente_actual = paciente_actual[2]
     texto_paciente_ganador = l[2]
@@ -57,7 +56,7 @@ def generar_subcadenas_de_secuencia(secuencia, corte, lista):
 
 def obtener_todas_secuencias(secuencia, lista_final):
     if len(secuencia) == 0:
-        return lista_final
+        return lista_final  
     caja_actualizada = generar_subcadenas_de_secuencia(secuencia, 1 , lista_final)
 
     return obtener_todas_secuencias(secuencia[1:], caja_actualizada)
@@ -73,6 +72,7 @@ def contar_nucleotidos(ADN):
         cont = -1 
     
     return cont + contar_nucleotidos(ADN[1:])
+
 
 def mutacion_genetica(secuencia):
     if len(secuencia) == 0:
@@ -95,7 +95,7 @@ lista_base = [seq1, seq2, seq3]
 seq_nueva = [4, "Paciente Delta", "TTAA", 5]
 
 print("1. Registrar:", registrar_secuencias(lista_base, seq_nueva))
-print("2. Ocurrencias de 'AT':", contar_ocurrencias("AT", "ATGCATGCAT"))
+print("2. Ocurrencias de 'AT':", contar_ocurrencias("AT", "ATGCATGCAAT"))
 print("3. Riesgo promedio:", riesgo_promedio(lista_base))
 
 print("4. Secuencia más larga:", secuencia_mas_larga(lista_base, lista_base[0])[2]) 
