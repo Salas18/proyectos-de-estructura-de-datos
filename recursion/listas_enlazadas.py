@@ -423,6 +423,9 @@ def paso_preferencial(via):
           ultimo_vip = actual
       actual = siguiente
 
+paso_preferencial(via)
+print(via)
+
 
      
           
