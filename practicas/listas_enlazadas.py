@@ -424,7 +424,75 @@ def paso_preferencial(via):
       actual = siguiente
 
 paso_preferencial(via)
+
+def eliminar_camiones(via):
+  actual = via.head 
+
+  while actual is not None:
+    siguiente = actual.next 
+    datos = actual.value.split("-")
+    tipo = datos[1]
+    prioridad = int(datos[2])
+
+    if tipo == "camion" and prioridad > 3:
+      if actual.prev is not None:
+        actual.prev.next = actual.next
+      else:
+        via.head = actual.next 
+
+      if actual.next is not None:
+        actual.next.prev = actual.prev
+      else:
+        via.tail = actual.prev
+
+    actual = siguiente
+
+eliminar_camiones(via)
+
+
+def simular_accidentes(via, p1, p2):
+  primero = None
+  segundo = None
+  actual = via.head
+  while actual:
+    datos = actual.value.split("-")
+    dato_placa = datos[0]
+
+    if dato_placa == p1 or dato_placa == p2:
+      if not primero:
+        primero = actual
+      else:
+        segundo = actual
+        break 
+    actual = actual.next
+  
+  if primero and segundo:
+    primero.next = segundo
+    segundo.prev = primero
+
+simular_accidentes(via, "XYZ12E", "QKA12G")
+print("Vía después del accidente:")
 print(via)
+
+
+
+
+
+
+
+
+
+
+
+
+
+print(via)
+
+    
+
+    
+      
+  
 
 
      
