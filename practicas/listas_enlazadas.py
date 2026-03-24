@@ -419,8 +419,6 @@ def paso_preferencial(via):
               ultimo_vip.next.prev = actual
               ultimo_vip.next = actual
           ultimo_vip = actual
-        else:
-          ultimo_vip = actual
       actual = siguiente
 
 paso_preferencial(via)
@@ -471,7 +469,81 @@ def simular_accidentes(via, p1, p2):
     segundo.prev = primero
 
 simular_accidentes(via, "XYZ12E", "QKA12G")
-print("Vía después del accidente:")
+
+def invertir_orden_via(via):
+  autos = 0
+  motos = 0
+  actual = via.head 
+
+  while actual is not None:
+    dato = actual.value.split("-")
+    dato_vehiculo = dato[1]
+
+    if dato_vehiculo == "auto":
+      autos += 1
+    elif dato_vehiculo == "moto":
+      motos += 1
+    
+    actual = actual.next
+
+  if autos > motos:
+    actual = via.head
+    bolsillo = None
+
+    while actual is not None:
+      bolsillo = actual.prev 
+      actual.prev = actual.next
+      actual.next = bolsillo
+      actual = actual.prev
+
+    if via.head is not None:
+      via.head, via.tail = via.tail, via.head
+      
+
+invertir_orden_via(via)
+
+def organizar_prioridad(via):
+  nuevo_inicio = None
+  nuevo_fin = None
+    
+  nivel = 1
+  while nivel <= 5:
+    nivel_texto = str(nivel)
+    actual = via.head
+
+    while actual is not None:
+      siguiente = actual.next
+      prioridad = actual.value.split("-")
+      dato = prioridad[2]
+
+      if dato == nivel_texto:
+        if actual.prev:
+          actual.prev.next = actual.next
+        else:
+          via.head = actual.next
+        
+        if actual.next:
+          actual.next.prev = actual.prev
+        else:
+          via.tail = actual.prev
+        actual.next = None
+        actual.prev = nuevo_fin
+        if nuevo_inicio is None:
+          nuevo_inicio = actual
+        else:
+          nuevo_fin.next = actual
+        
+        nuevo_fin = actual
+
+      actual = siguiente
+    nivel += 1
+
+  via.head = nuevo_inicio
+  via.tail = nuevo_fin
+
+organizar_prioridad(via)
+
+print("Vía después de todos los eventos:")
 print(via)
 
 
@@ -483,10 +555,6 @@ print(via)
 
 
 
-
-
-
-print(via)
 
     
 
