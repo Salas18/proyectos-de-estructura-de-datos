@@ -378,6 +378,36 @@ class DoublyLinkedList:
   def generate(self, num, min, max):
     for _ in range(num):
       self.append(random.randint(min,max))
+class Queue:
+
+  def __init__(self):
+    self.__q = LinkedList()
+
+
+  def enqueue(self, e):
+    self.__q.append(e)
+    return True
+
+  def dequeue(self):
+
+    if self.is_empty():
+      return "No hay elementos en la cola"
+
+    temp_node = self.__q.popfirst()
+    return temp_node.value
+
+  def is_empty(self):
+
+    return self.__q.size == 0
+
+  def len(self):
+    return self.__q.size
+
+
+  def __str__(self):
+    result = [str(nodo.value) for nodo in self.__q]
+    return ' -- '.join(result)
+
 
 
 via = DoublyLinkedList()
@@ -395,9 +425,11 @@ def paso_preferencial(via):
 
     while actual is not None:
       siguiente = actual.next
-      datos = actual.value.split("-")
-      tipo = datos[1]
-      prioridad = datos[2]
+      g = actual.value.find("-")
+      g2 = actual.value.find("-", g + 1)
+      tipo = actual.value[g+1:g2]
+      prioridad = actual.value[g2+1:]
+      
 
       if tipo == "moto" and prioridad == "1":
         if actual != via.head:
@@ -427,11 +459,13 @@ def eliminar_camiones(via):
   actual = via.head 
 
   while actual is not None:
-    siguiente = actual.next 
-    datos = actual.value.split("-")
-    tipo = datos[1]
-    prioridad = int(datos[2])
+    siguiente = actual.next
+    g = actual.value.find("-")
+    g2 = actual.value.find("-", g + 1)
+    tipo = actual.value[g+1:g2]
+    prioridad = int(actual.value[g2+1:])
 
+    
     if tipo == "camion" and prioridad > 3:
       if actual.prev is not None:
         actual.prev.next = actual.next
@@ -453,8 +487,8 @@ def simular_accidentes(via, p1, p2):
   segundo = None
   actual = via.head
   while actual:
-    datos = actual.value.split("-")
-    dato_placa = datos[0]
+    g1 = actual.value.find("-")
+    dato_placa = actual.value[:g1]
 
     if dato_placa == p1 or dato_placa == p2:
       if not primero:
@@ -476,8 +510,9 @@ def invertir_orden_via(via):
   actual = via.head 
 
   while actual is not None:
-    dato = actual.value.split("-")
-    dato_vehiculo = dato[1]
+    g = actual.value.find("-")
+    g2 = actual.value.find("-", g + 1)
+    dato_vehiculo  = actual.value[g+1:g2]
 
     if dato_vehiculo == "auto":
       autos += 1
@@ -513,8 +548,8 @@ def organizar_prioridad(via):
 
     while actual is not None:
       siguiente = actual.next
-      prioridad = actual.value.split("-")
-      dato = prioridad[2]
+      g = actual.value.rfind("-")
+      dato = actual.value[g+1:]
 
       if dato == nivel_texto:
         if actual.prev:
